@@ -10,10 +10,13 @@ const app = express()
 // Kalder root route med request og response objekt
 app.get('/', (req, res) => {
     res.send('Hej verden!')
-    console.log(req)
 })
 
 app.use("/cars", carRouter)
+
+app.use((req, res) => {
+    res.send('404 - kan ikke finde siden du leder efter.')
+})
 
 
 app.listen(port, () => {
