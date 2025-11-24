@@ -390,7 +390,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  Cars: 'Cars'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "user" | "cars"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -476,6 +477,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Cars: {
+      payload: Prisma.$CarsPayload<ExtArgs>
+      fields: Prisma.CarsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CarsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CarsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload>
+        }
+        findFirst: {
+          args: Prisma.CarsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CarsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload>
+        }
+        findMany: {
+          args: Prisma.CarsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload>[]
+        }
+        create: {
+          args: Prisma.CarsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload>
+        }
+        createMany: {
+          args: Prisma.CarsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CarsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload>
+        }
+        update: {
+          args: Prisma.CarsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload>
+        }
+        deleteMany: {
+          args: Prisma.CarsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CarsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CarsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarsPayload>
+        }
+        aggregate: {
+          args: Prisma.CarsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCars>
+        }
+        groupBy: {
+          args: Prisma.CarsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CarsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -525,6 +592,19 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const CarsScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  brand: 'brand',
+  model: 'model',
+  year: 'year',
+  price: 'price',
+  fueltype: 'fueltype'
+} as const
+
+export type CarsScalarFieldEnum = (typeof CarsScalarFieldEnum)[keyof typeof CarsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -540,6 +620,16 @@ export const UserOrderByRelevanceFieldEnum = {
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+export const CarsOrderByRelevanceFieldEnum = {
+  category: 'category',
+  brand: 'brand',
+  model: 'model',
+  fueltype: 'fueltype'
+} as const
+
+export type CarsOrderByRelevanceFieldEnum = (typeof CarsOrderByRelevanceFieldEnum)[keyof typeof CarsOrderByRelevanceFieldEnum]
 
 
 
@@ -656,6 +746,7 @@ export interface PrismaClientOptions {
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  cars?: Prisma.CarsOmit
 }
 
 /* Types for Logging */

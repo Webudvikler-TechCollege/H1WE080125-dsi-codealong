@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated"
 }
 
 datasource db {
@@ -14,21 +15,21 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String 
-  password String 
-  email String @unique
+  id       Int    @id @default(autoincrement())
+  name     String
+  password String
+  email    String @unique
 
   @@map("user")
 }
 
 model Cars {
-  id Int @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   category String
-  brand String
-  model String
-  year Int
-  price Decimal @db.Decimal(10, 2)
+  brand    String
+  model    String
+  year     Int
+  price    Float
   fueltype String
 
   @@map("car")
