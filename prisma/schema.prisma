@@ -33,3 +33,18 @@ model Cars {
 
   @@map("car")
 }
+
+model Brands {
+  id Int @id @default(autoincrement())
+  name String
+  logoUrl String
+
+  @@map("brand")
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+  name String
+
+  @@map("category")
+}
