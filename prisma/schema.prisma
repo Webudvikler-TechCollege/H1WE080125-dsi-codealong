@@ -15,36 +15,8 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
-  name String 
-  password String 
+  name String
   email String @unique
 
-  @@map("user")
-}
-
-model Cars {
-  id Int @id @default(autoincrement())
-  category String
-  brand String
-  model String
-  year Int
-  price Decimal @db.Decimal(10, 2)
-  fueltype String
-
-  @@map("car")
-}
-
-model Brands {
-  id Int @id @default(autoincrement())
-  name String
-  logoUrl String
-
-  @@map("brand")
-}
-
-model Category {
-  id Int @id @default(autoincrement())
-  name String
-
-  @@map("category")
+  @@map("users")
 }
