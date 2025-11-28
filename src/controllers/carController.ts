@@ -9,7 +9,11 @@ import { prisma } from '../prisma.js';
  */
 export const getRecords = async (req: Request, res: Response) => {
   try {
-    const data = await prisma.car.findMany();
+    const data = await prisma.car.findMany({
+      include: {
+        brand: true
+      }
+    });
     return res.status(200).json(data);
   } catch (error) {
     console.error(error);
@@ -36,7 +40,11 @@ export const getRecord = async (req: Request, res: Response) => {
       select: {
         id: true,
         model: true,
-        brand: true
+        brand: {
+          select: {
+            name: true
+          }
+        }
       }
     })
     return res.status(200).json(data)
@@ -54,9 +62,9 @@ export const getRecord = async (req: Request, res: Response) => {
  */
 export const createRecord = async (req: Request, res: Response) => {
 
-  const { category, brand, model, year, price, fueltype } = req.body;
+  const { category, brandId, model, year, price, fueltype } = req.body;
   
-  if(!category || !brand || !model || !year || !price || !fueltype) {
+  if(!category || !brandId || !model || !year || !price || !fueltype) {
     return res.status(400).json({ error: 'All data is required' })
   }
   
@@ -64,7 +72,7 @@ export const createRecord = async (req: Request, res: Response) => {
     const data = await prisma.car.create({
       data: {
         category,
-        brand,
+        brandId: Number(brandId),
         model,
         year: Number(year),
         price,

@@ -17,11 +17,25 @@ datasource db {
 model Car {
   id       Int     @id @default(autoincrement())
   category String
-  brand    String
-  model    String 
+  brandId  Int
+  model    String
   year     Int
   price    Decimal @db.Decimal(10, 2)
   fueltype String
 
+  brand Brand @relation(fields: [brandId], references: [id])
+
   @@map("cars")
+}
+
+// Brand model
+model Brand {
+  id      Int    @id @default(autoincrement())
+  name    String
+  logoUrl String
+
+  cars Car[]
+
+  @@map("brands")
+
 }
