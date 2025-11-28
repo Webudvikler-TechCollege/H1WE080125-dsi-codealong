@@ -1,6 +1,12 @@
 import { Request, Response } from 'express';
 import { prisma } from '../prisma.js';
 
+/**
+ * Method Get Records
+ * @param req 
+ * @param res 
+ * @returns Array
+ */
 export const getRecords = async (req: Request, res: Response) => {
   try {
     const data = await prisma.car.findMany();
@@ -11,12 +17,19 @@ export const getRecords = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * Method Get Record
+ * @param req 
+ * @param res 
+ * @returns Object
+ */
 export const getRecord = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
 
   if(!id) {
     return res.status(400).json({ error: 'Id is missing '})
   }
+
   try {
     const data = await prisma.car.findUnique({
       where: { id },
@@ -33,6 +46,12 @@ export const getRecord = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Method Create Record
+ * @param req 
+ * @param res 
+ * @returns Object
+ */
 export const createRecord = async (req: Request, res: Response) => {
 
   const { category, brand, model, year, price, fueltype } = req.body;
@@ -57,5 +76,4 @@ export const createRecord = async (req: Request, res: Response) => {
     console.error(error);
     return res.status(500).json({ error: 'Something went wrong' }) 
   }
-
 }
