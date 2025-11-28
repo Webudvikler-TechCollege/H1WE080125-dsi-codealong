@@ -77,3 +77,64 @@ export const createRecord = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Something went wrong' }) 
   }
 }
+
+/**
+ * Method Update Record
+ * @param req 
+ * @param res 
+ * @returns Object
+ */
+export const updateRecord = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+
+  if(!id) {
+    return res.status(400).json({ error: 'Id is missing '})
+  }
+
+  const { category, brand, model, year, price, fueltype } = req.body;
+  
+  if(!category || !brand || !model || !year || !price || !fueltype) {
+    return res.status(400).json({ error: 'All data is required' })
+  }
+
+  try {
+    const data = await prisma.car.update({
+      where: { id },
+      data: {
+        category,
+        brand,
+        model,
+        year: Number(year),
+        price,
+        fueltype
+      }
+    })
+    return res.status(201).json(data)
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Something went wrong' }) 
+  }
+}
+
+export const deleteRecord = async (req: Request, res: Response) => {
+  const id = Number(req.params.id)
+
+  if(!id) {
+    return res.status(400).json({ error: 'Id is missing '})
+  }
+  
+  try {
+    const data = await prisma.car.delete({
+      where: { id }
+    })
+    res.status(200).json({ 
+      message: 'Record deleted',
+      deletedId: id
+    })
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Failed to delete record' }) 
+  }
+  
+}
+

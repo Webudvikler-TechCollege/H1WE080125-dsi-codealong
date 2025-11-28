@@ -17,7 +17,7 @@ app.use(express.json());
 // Gør det muligt at modtage form-data (fx fra formularer)
 app.use(express.urlencoded({ extended: true }));
 
-// Anvend routes
+// Base routes
 app.use('/api/cars', carRoutes);
 
 // 404 route
