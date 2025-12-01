@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { carRoutes } from './routes/carRoutes.js';
+import { userRoutes } from './routes/userRoutes.js';
 
 // Indlæs miljøvariabler fra .env (uden at vise logs)
 dotenv.config({ quiet: true });
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Base routes
 app.use('/api/cars', carRoutes);
+app.use('/api/users', userRoutes);
 
 // 404 route
 app.use((req, res) => {
